@@ -13,8 +13,6 @@ RUN apk --no-cache add --virtual native-deps \
   
 RUN  npm install -g react-scripts react-app-rewired
 
-RUN npm install -g --unsafe-perm node-sass
-
 ENV PORT 80
 EXPOSE 80
 EXPOSE 35729
