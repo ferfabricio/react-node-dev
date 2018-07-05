@@ -1,13 +1,18 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=ferfabricio/react-dev-docker
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker push $REPO
+- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- export REPO=ferfabricio/react-dev-docker
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
+- docker build -f Dockerfile -t $REPO:$COMMIT .
+- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker push $REPO
+env:
+  global:
+  - secure: MiqGuEcBgxZF7qF9emUtSDGcdWZqgvobXqVRy7rknV+xmCSI5j81SJVSm44Z5/pLkImJ7C8S3bQP/b90tkMbi6b6ydHrNXMwZv4XQ6rMslyMa5YfKu5A9+3rGeig2G0s9dMNf4Byr35PDU/CiBcxmZFpUnXt8szF2emuJdoO3HHLCNXrXnuAa3wGBOODK4rpMdkLZoNrYmMweKKpT5SisnPsoFFpNxhBzynT6hWbbQsjbb24fOSu1UIZXXZRdExzzagSIN4bZG94i5IWL6TrZ6XarPEd2gRKQHbHU69TlbL2gARH+i3gF25TX55UUK4Sd1hg1PVq6kHN2tt8IoM7YHTBzKj7SMs+kPVbE8hVCJ/fQX4OP0NBjIsPzYbFBAOUfk6te8S2lImF6FAzGMOUqqIianz2sX+XrEx8MxnyPAkerMuIz70BI0zH2vxjmAWL7ks/pQcWFeQFOe/1cZVkt75Z4CNssF9sElAmJ/QwwZT41H79rT9ZprNBbh6XP6teEnDB4zPbc0A/xBHcfRt9hyeWZIeeWUkkN/JiBkVHFuehdN+ZUQPvC5YPA2KL14fhb62+wtTVJMXHrIFGtlQ3QwzkkWytsKhKaEJDxTatp97uJjLI/+9TA1aJEHNRlNVhaUvrjWK6DZUncP8rbJiiLqJQhILfoi/yKJedbSPUD9g=
+  - secure: G8nSEhfC5EeVwzkpudKNedwFpNMFdNZg2t70qoNevVx3VGZNjyp1UQe4gSz3j4UWFJIwpI8urx04jLYE4JGk98BBcRD19A/JMALINvykDxxCvDofZCeAmgH0oTHptgaJybpFjSGPZIHWUS6hMRTYfGapIJOHNh82BW0BBvpXsUwrD1I8ho7pB+NO0K/UMkuXrkCKGGKG9X8xNj0jVQGkirkFsF+Pss4HzfmAoFmkoQXWZ8w/3ooBrLE1tcqMn4SNbql19bs5ln47fEeyUrwnWM5wDHeIN3ZS7Sg+FXqv+em750aRFjKXejVEoeW7YB+62Z/kbVUHh8pgaAxPNntxba0zWa6er7ltjEEtBcGkiio9tHgIVxdy8jBvSW4fNta8ttzwhUGJnzLJ/klUJ9qAAylSN/LKoXXXZYcsepnSnMViXTGY+ClhS7Bf37WtNvfaRZ+Gfq0nwifyW16Cs3cQLOsOKv6am3j06GqlUs5HiGLcIM20hyz9HYMPs6WROia2KX6CAnEV3MADl0q0Rq59vvwQPUdfqiu/5EsThlqmKljJA8J/FEsI2U8f9DreIQ8lSv112X2kKQGw51gKblrP4uw5qGaVWgr7lJRlYOEe+uDVbG0mcdZaAoUyfQjjIZsk8EKqdyzG8aCdQxnOfX8ZOg1qmYXhf0d6fJJhQZL02ck=
+  - secure: T8P7AbnMlLcPPKYV0n1rWw2imJDY4hmaIdyRUgstPXlk3ckL1zypwRFnpNqghIhHgMNiB83+6dX52eUGgLCjLSjvmFFR1lbaB4+1XkGssvRbVt7e5GCcnJkFxZvvCBF/ItYTIhjfCD7E43Domi0v9wZ59Yw12cC4rP990be9N6EWwCzDLcHr2LCGTq1a98j3D1j4Ri0Y0izBvlwpxQ0IlKOqCcr/xR4PW135+G+3SNni5nWsOmVMT7ucn23vqgtm+EcltLdaR1FwQPSjeHShVYmu8HIbJskZLnWDy9vyU60pYLKaVqPhfq50Rs0G5fLt551+ngNtMFtrqcLPbR9WZEQVPtw1a2uv4s1LLipuK4taV5Q/co4ac4pZNaBKR6LP4wXwrDnAkSoqp6VLM5JSE5qc6mut+cCdJjbcC6crIW568dV8Y76J+3nEKU+6ki7l0ZgcyUNtebq5LqEPMni9S07MOJeAe+dkFcsbbi6DRcJmGaXnqRgMHUeJQ/ZE58crE0wDqu73ppwrBvVvg0oZntRHAfsoRLnqEvc2yxpDrNaPmMMk9NrTIm/yOkpxT2UZ5tHIsxf2x9ESWn5dNH449BYy1LXID/XfwLKAJ0jUWxmihxbB3qgFANhindfeRWum0P27bYWVVpoWLWgGK58NpK23s8CzWItnmPqswjTTEjo=
+  - COMMIT=${TRAVIS_COMMIT::8}
