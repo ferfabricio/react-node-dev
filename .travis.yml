@@ -19,8 +19,6 @@ install:
 script:
 - echo "Buildando imagem!"
 - docker build -f Dockerfile -t $REPO:$COMMIT .
-
-after_success:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - docker tag $REPO:$COMMIT $REPO:$TAG
