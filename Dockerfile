@@ -3,7 +3,6 @@ FROM node:9.11.2-alpine
 WORKDIR /app
 
 ENV PATH=/app/node_modules/.bin:~/.npm-global/bin:$PATH
-ENV NPM_CONFIG_PREFIX=~/.npm-global
 
 RUN mkdir ~/.npm-global
 
@@ -14,7 +13,7 @@ RUN apk --no-cache add --virtual native-deps \
   
 RUN  npm install -g react-scripts react-app-rewired
 
-RUN npm install -g node-sass
+RUN npm install -g --unsafe-perm node-sass
 
 RUN apk del native-deps
 
