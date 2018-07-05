@@ -15,9 +15,6 @@ RUN  npm install -g react-scripts react-app-rewired
 
 RUN npm install -g --unsafe-perm node-sass
 
-RUN apk del native-deps
-
-
 ENV PORT 80
 EXPOSE 80
 EXPOSE 35729
