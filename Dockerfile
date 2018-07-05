@@ -14,7 +14,7 @@ RUN apk --no-cache add --virtual native-deps \
   
 RUN  npm install -g react-scripts react-app-rewired
 
-RUN npm install node-sass
+RUN npm install -g node-sass
 
 RUN apk del native-deps
 
