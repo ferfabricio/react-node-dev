@@ -1,6 +1,16 @@
 sudo: required
+
 services:
 - docker
+
+language: php
+
+install:
+  - echo "install nothing!"
+  
+script:
+  - echo "no tests!"
+
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - export REPO=ferfabricio/react-dev-docker
@@ -10,6 +20,7 @@ after_success:
 - docker tag $REPO:$COMMIT $REPO:$TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $REPO
+
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::8}
