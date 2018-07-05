@@ -10,10 +10,13 @@ RUN mkdir ~/.npm-global
 RUN apk --no-cache add --virtual native-deps \
   g++ gcc libgcc libstdc++ linux-headers make python && \
   npm install -g npm && \
-  npm cache verify && \
-  npm install -g react-scripts react-app-rewired && \
-  npm install node-sass && \
-  apk del native-deps
+  npm cache verify
+  
+RUN  npm install -g react-scripts react-app-rewired
+
+RUN npm install node-sass
+
+RUN apk del native-deps
 
 
 ENV PORT 80
